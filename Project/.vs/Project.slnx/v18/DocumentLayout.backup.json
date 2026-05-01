@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\user\\source\\repos\\reviews_neural_network\\reviews_neural_network\\Project\\",
+  "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\source\\repos\\reviews_neural_network\\reviews_neural_network\\Project\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\main.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:main.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\source\\repos\\reviews_neural_network\\reviews_neural_network\\Project\\amazon_reviews.py||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\amazon_reviews.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:amazon_reviews.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
@@ -36,11 +36,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.py",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\reviews_neural_network\\reviews_neural_network\\Project\\main.py",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\main.py",
               "RelativeDocumentMoniker": "main.py",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\reviews_neural_network\\reviews_neural_network\\Project\\main.py",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\main.py",
               "RelativeToolTip": "main.py",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-04-24T01:24:28.841Z",
               "EditorCaption": ""
@@ -49,14 +49,13 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "amazon_reviews.py",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\reviews_neural_network\\reviews_neural_network\\Project\\amazon_reviews.py",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\amazon_reviews.py",
               "RelativeDocumentMoniker": "amazon_reviews.py",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\reviews_neural_network\\reviews_neural_network\\Project\\amazon_reviews.py",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\amazon_reviews.py",
               "RelativeToolTip": "amazon_reviews.py",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-04-24T01:24:27.226Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-24T01:24:27.226Z"
             }
           ]
         }

@@ -35,26 +35,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "main.py",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\main.py",
-              "RelativeDocumentMoniker": "main.py",
-              "ToolTip": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\main.py",
-              "RelativeToolTip": "main.py",
+              "Title": "Main.py",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\Main.py",
+              "RelativeDocumentMoniker": "Main.py",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\Main.py",
+              "RelativeToolTip": "Main.py",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2026-04-24T01:24:28.841Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "amazon_reviews.py",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\amazon_reviews.py",
-              "RelativeDocumentMoniker": "amazon_reviews.py",
-              "ToolTip": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\amazon_reviews.py",
-              "RelativeToolTip": "amazon_reviews.py",
+              "Title": "Amazon_Reviews.py",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\Amazon_Reviews.py",
+              "RelativeDocumentMoniker": "Amazon_Reviews.py",
+              "ToolTip": "C:\\Users\\user\\Desktop\\Machine Learning\\CS345-Reviews-Project\\Project\\Amazon_Reviews.py",
+              "RelativeToolTip": "Amazon_Reviews.py",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2026-04-24T01:24:27.226Z"
             }
           ]
