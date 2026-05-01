@@ -23,18 +23,17 @@ def filter_data():
 
     
 
-def load_data():
+def load_data(LIMIT):
     global data
     
-    # Load from cache if it exists
     if os.path.exists(CACHE_FILE):
         print("Loading from cache...")
         with open(CACHE_FILE, 'rb') as f:
             data = pickle.load(f)
+        data = data[:LIMIT]  # slice after loading
         print(f"Loaded {len(data)} records from cache")
         return
 
-    # Otherwise load from JSONL and save cache
     root = tk.Tk()
     root.withdraw()
     file_path = filedialog.askopenfilename(
@@ -44,18 +43,17 @@ def load_data():
     if file_path:
         print(f"Loading: {file_path} ...")
         with open(file_path, 'r') as file:
-            for line in file:
+            for i, line in enumerate(file):
+                if i >= LIMIT:
+                    break
                 data.append(json.loads(line))
         print(f"Loaded {len(data)} records")
-        
-        # Save cache
         with open(CACHE_FILE, 'wb') as f:
             pickle.dump(data, f)
         print("Saved to cache")
     else:
         print("No file selected")
     root.destroy()
-
     
 
 
