@@ -8,9 +8,6 @@ CACHE_FILE = "data_cache.pkl"
 
 data = []
 
-
-
-
 def filter_data():
     filtered_data = []
     for item in data:

@@ -12,7 +12,7 @@ import re
 import os
 
 PREPROCESSED_CACHE = "preprocessed_cache.pkl"
-TFIDF_FEATURES = 5000 # Number of important words found in data to use as features for ML models
+TFIDF_FEATURES = 1000 # Number of important words found in data to use as features for ML models
 
 
 stop_words = set(stopwords.words('english'))
@@ -47,13 +47,14 @@ def analyze_sentiment(data):
 
 def tfidf_vectorize(cleaned_data):
     texts = [item['text'] for item in cleaned_data]
-    vectorizer = TfidfVectorizer(max_features=TFIDF_FEATURES)  
+    vectorizer = TfidfVectorizer(max_features=TFIDF_FEATURES, ngram_range=(1,2))  
     X = vectorizer.fit_transform(texts)
     return X, vectorizer
 
 
 
-def preprocess_ratings(data):
+def preprocess_ratings(data, use_vader=True):
+ 
     if os.path.exists(PREPROCESSED_CACHE):
         print("Loading preprocessed data from cache...")
         with open(PREPROCESSED_CACHE, 'rb') as f:
@@ -67,14 +68,16 @@ def preprocess_ratings(data):
         print()
 
     rating_map = split_into_map(cleaned_data)
-    features = analyze_sentiment(cleaned_data)
     tfidf_matrix, vectorizer = tfidf_vectorize(cleaned_data)
     
-    X = hstack([csr_matrix(features), tfidf_matrix])  
+    if use_vader:
+        features = analyze_sentiment(cleaned_data)
+        X = hstack([csr_matrix(features), tfidf_matrix])
+    else:
+        X = tfidf_matrix
+
     y = np.array([item['rating'] for item in cleaned_data])  
 
-
-    
     with open(PREPROCESSED_CACHE, 'wb') as f:
         pickle.dump((X, y), f)
     print("Saved preprocessed cache")
