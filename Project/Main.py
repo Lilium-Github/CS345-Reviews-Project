@@ -15,7 +15,7 @@ load_data(LIMIT)
 data = get_data() 
 
 # preprocess_ratings(data) removes stop words, punctuation, and HTML tags and splits into a map of ratings to reviews
-X, y = preprocess_ratings(data, use_vader=False)
+X, y = preprocess_ratings(data, use_vader=True)
 
 # stored in sparse matrix for efficiency
 
@@ -27,23 +27,23 @@ print("Matrix size: ", X.shape)
 
 # Feed forward (with gpu) 
 
-# Attempt #1 100,000 reviews Train: 71.169% Test: 70.54% hidden_size=256, batch_size=256, epochs=15 and dropout=0.5, TFIDF_FEATURES=1000 Data: VideoGames
+# Attempt #1 100,000 reviews Train: 71.169% Test: 70.54% hidden_size=256, batch_size=256, epochs=15 and dropout=0.5, TFIDF_FEATURES=1000 Data: VideoGames 
 
-# Attempt #2 100,000 reviews Train: 64.09% Test: 63.07% hidden_size=256, batch_size=256, epochs=15 and dropout=0.5, TFIDF_FEATURES=1000 Data: Software
+# Attempt #2 100,000 reviews Train: 64.09% Test: 63.07% hidden_size=256, batch_size=256, epochs=15 and dropout=0.5, TFIDF_FEATURES=1000 Data: Software 
 
-# Attempt #3 100,000 reviews Train: 75.11% Test: 74.11% hidden_size=256, batch_size=256, epochs=15 and dropout=0.2, TFIDF_FEATURES=1000 Data: Office_Products
+# Attempt #3 100,000 reviews Train: 75.11% Test: 74.11% hidden_size=256, batch_size=256, epochs=15 and dropout=0.2, TFIDF_FEATURES=1000 Data: Office_Products 
 y_remapped = y - 1
-X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.1, random_state=42)
 
 results = []
 
-for hidden_size in [64, 128, 256]:
-    for dropout in [0.2, 0.3, 0.5]:
-        for lr in [0.001, 0.0001]:
+for hidden_size in [128, 256]:
+    for dropout in [0.2, 0.3, 0.5, 0.6]:
+        for lr in [0.001, 0.01,0.1]:
             trainer = FeedForwardTrainer(
                 hidden_size=hidden_size,
                 epochs=15,
-                batch_size=256,
+                batch_size=64,
                 dropout=dropout,
                 lr=lr
             )

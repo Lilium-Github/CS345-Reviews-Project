@@ -4,17 +4,18 @@ from torch.utils.data import DataLoader, TensorDataset
 import numpy as np
 
 class FeedForward(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size, dropout=0.3):
+    def __init__(self, input_size, hidden_size, output_size, dropout=0.3, num_layers=4):
         super(FeedForward, self).__init__()
-        self.network = nn.Sequential(
-            nn.Linear(input_size, hidden_size),
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_size, hidden_size),
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_size, output_size)
-        )
+        layers = []
+        layers.append(nn.Linear(input_size, hidden_size))
+        layers.append(nn.ReLU())
+        layers.append(nn.Dropout(dropout))
+        for _ in range(num_layers - 1):
+            layers.append(nn.Linear(hidden_size, hidden_size))
+            layers.append(nn.ReLU())
+            layers.append(nn.Dropout(dropout))
+        layers.append(nn.Linear(hidden_size, output_size))
+        self.network = nn.Sequential(*layers)
     
     def forward(self, x):
         return self.network(x)
