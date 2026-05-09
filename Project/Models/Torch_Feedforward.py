@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 import numpy as np
+from sklearn.metrics import accuracy_score
 
 class FeedForward(nn.Module):
     def __init__(self, input_size, hidden_size, output_size, dropout=0.3, num_layers=4):
@@ -76,3 +77,31 @@ class FeedForwardTrainer:
             outputs = self.model(X)
             predictions = torch.argmax(outputs, dim=1)
         return predictions.cpu().numpy()
+
+
+
+    def grid_search(self, X_train, y_train, X_test, y_test):
+        results = []
+        for hidden_size in [128, 256]:
+            for dropout in [0.2, 0.3, 0.5, 0.6]:
+                for lr in [0.001, 0.01, 0.1]:
+                    trainer = FeedForwardTrainer(
+                        hidden_size=hidden_size,
+                        epochs=15,
+                        batch_size=64,
+                        dropout=dropout,
+                        lr=lr
+                    )
+                    trainer.train(X_train, y_train)
+                    train_predictions = trainer.predict(X_train)
+                    predictions = trainer.predict(X_test)
+
+                    train_acc = accuracy_score(y_train, train_predictions)
+                    test_acc = accuracy_score(y_test, predictions)
+                    results.append((test_acc, train_acc, hidden_size, dropout, lr))
+                    print(f"hidden={hidden_size} dropout={dropout} lr={lr} → Train: {train_acc*100:.2f}% Test: {test_acc*100:.2f}%")
+
+        results.sort(reverse=True)
+        best = results[0]
+        print(f"\nBest → Test: {best[0]*100:.2f}% Train: {best[1]*100:.2f}% hidden={best[2]} dropout={best[3]} lr={best[4]}")
+        return results

@@ -1,6 +1,5 @@
 from Amazon_Reviews import get_data, load_data
 from Preprocessor import preprocess_ratings
-from Models.Torch_Feedforward import FeedForwardTrainer
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
@@ -8,7 +7,7 @@ from sklearn.model_selection import train_test_split
 # set a limit to the number of records to load, or set to a very high number to load all records
 # load_data() opens explorer to choose JSONL file with reviews and ratings
 
-LIMIT = 100000 
+LIMIT = 10000 
 load_data(LIMIT) 
 
 # get_data() gets the data as the review text and rating only
@@ -32,30 +31,22 @@ print("Matrix size: ", X.shape)
 # Attempt #2 100,000 reviews Train: 64.09% Test: 63.07% hidden_size=256, batch_size=256, epochs=15 and dropout=0.5, TFIDF_FEATURES=1000 Data: Software 
 
 # Attempt #3 100,000 reviews Train: 75.11% Test: 74.11% hidden_size=256, batch_size=256, epochs=15 and dropout=0.2, TFIDF_FEATURES=1000 Data: Office_Products 
-y_remapped = y - 1
-X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.1, random_state=42)
 
-results = []
+# Feedforward:
+#from Models.Torch_Feedforward import FeedForwardTrainer
+#y_remapped = y - 1
+#X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.1, random_state=42)
+#trainer = FeedForwardTrainer()
+#results = trainer.grid_search(X_train, y_train, X_test, y_test)
 
-for hidden_size in [128, 256]:
-    for dropout in [0.2, 0.3, 0.5, 0.6]:
-        for lr in [0.001, 0.01,0.1]:
-            trainer = FeedForwardTrainer(
-                hidden_size=hidden_size,
-                epochs=15,
-                batch_size=64,
-                dropout=dropout,
-                lr=lr
-            )
-            trainer.train(X_train, y_train)
-            train_predictions = trainer.predict(X_train)
-            predictions = trainer.predict(X_test)
-         
-            acc = accuracy_score(y_test, predictions)
-            results.append((acc, hidden_size, dropout, lr))
-            train_acc = accuracy_score(y_train, train_predictions)
-            test_acc = accuracy_score(y_test, predictions)
-            print("train: ", train_acc, " test:", test_acc)
+# SVM:
+from Models.SVM import Svm_Trainer
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Svm_Trainer(X_train, X_test, y_train, y_test)
 
-results.sort(reverse=True)
-print("\nBest:", results[0])
+
+#Best params: {'C': 1} 100,000 linear 50k features software ~22 hours to train
+#CV accuracy: 0.71%
+#Train: 82.89%
+#Test: 71.54%
+
