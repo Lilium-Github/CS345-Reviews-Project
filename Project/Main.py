@@ -50,3 +50,30 @@ Svm_Trainer(X_train, X_test, y_train, y_test)
 #Train: 82.89%
 #Test: 71.54%
 
+
+#Video games with 10,000 reviews and 3000 TF-IDF features:
+#Best params: {'C': 1}
+#CV accuracy: 0.695375
+#Train: 80.85%
+#Test: 69.30%
+
+# Books with 10,000 reviews and 3000 TF-IDF features and linear kernel:
+#Best params: {'C': 1}
+#CV accuracy: 0.633
+#Train: 78.45%
+#Test: 62.05%
+
+# CD & Vinyl with 10,000 reviews and 3000 TF-IDF features and linear kernel:
+# Best params: {'C': 1}
+# CV accuracy: 0.7855000000000001
+# Train: 83.94%
+# Test: 78.90%
+
+# Clothing and Jewelry with 10,000 reviews and 3000 TF-IDF features and linear kernel:
+#Best params: {'C': 1}
+#CV accuracy: 0.6954999999999999
+#Train: 82.09%
+#Test: 69.95%
+
+
+
