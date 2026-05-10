@@ -24,24 +24,24 @@ print(X[:20].toarray())
 print("Matrix size: ", X.shape)
 
 #Feedforward:
-from Models.Torch_Feedforward import FeedForwardTrainer
-y_remapped = y - 1
-X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.1, random_state=42)
-trainer = FeedForwardTrainer()
-results = trainer.grid_search(X_train, y_train, X_test, y_test)
+#from Models.Torch_Feedforward import FeedForwardTrainer
+#y_remapped = y - 1
+#X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.1, random_state=42)
+#trainer = FeedForwardTrainer()
+#results = trainer.grid_search(X_train, y_train, X_test, y_test)
 
-# SVM:
-#from Models.SVM import Svm_Trainer
+ #SVM:
+from Models.SVM import Svm_Trainer
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Svm_Trainer(X_train, X_test, y_train, y_test)
+
+
+
+#LogisticRegression:
+#from Models.LogisticRegression import LogisticRegressionTrainer
+#regtrainer = LogisticRegressionTrainer(max_features=3000)
 #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-#Svm_Trainer(X_train, X_test, y_train, y_test)
-
-
-
-# LogisticRegression:
-# from Models.LogisticRegression import LogisticRegressionTrainer
-# regtrainer = LogisticRegressionTrainer(max_features=3000)
-#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-# regtrainer.grid_search(X_train, y_train, X_test, y_test)
+#regtrainer.grid_search(X_train, y_train, X_test, y_test)
 
 
 # Naive Bayes:
@@ -67,7 +67,7 @@ results = trainer.grid_search(X_train, y_train, X_test, y_test)
 # Train: 77.50%
 # Test: 62.50%
 
-# SVM
+#SVM    
 # Train: 81.91%
 # Test: 63.00%
 
