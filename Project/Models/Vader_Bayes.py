@@ -104,11 +104,11 @@ for f in files:
 
         # step 9: predict
         prediction = model.predict(X_test)
-        #print(f"Falsetto Algorithm Accuracy: {accuracy_score(y_test, prediction)}")
+        #print(f"Naive Algorithm Accuracy: {accuracy_score(y_test, prediction)}")
         predictions.append(accuracy_score(y_test, prediction))
 
         vader_prediction = vader_model.predict(X_vader_test)
-        #print(f"Serra Algorithm Accuracy: {accuracy_score(y_vader_test, vader_prediction)}")
+        #print(f"Smart Algorithm Accuracy: {accuracy_score(y_vader_test, vader_prediction)}")
         vader_predictions.append(accuracy_score(y_vader_test, vader_prediction))
 
     print(f"-----------------------------------------------------------------\nData: {f}")
