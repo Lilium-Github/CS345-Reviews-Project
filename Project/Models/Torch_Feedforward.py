@@ -17,7 +17,7 @@ class FeedForward(nn.Module):
             layers.append(nn.Dropout(dropout))
         layers.append(nn.Linear(hidden_size, output_size))
         self.network = nn.Sequential(*layers)
-    
+
     def forward(self, x):
         return self.network(x)
 
@@ -28,6 +28,7 @@ class FeedForwardTrainer:
         self.epochs = epochs
         self.batch_size = batch_size
         self.lr = lr
+        self.dropout = dropout
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = None
 
@@ -35,7 +36,6 @@ class FeedForwardTrainer:
         if hasattr(features, "toarray"):
             features = features.toarray()
 
-        # Remap labels to start from 0
         unique = sorted(set(labels))
         label_map = {v: i for i, v in enumerate(unique)}
         labels = np.array([label_map[l] for l in labels])
@@ -50,7 +50,7 @@ class FeedForwardTrainer:
         input_size = X.shape[1]
         output_size = len(torch.unique(y))
 
-        self.model = FeedForward(input_size, self.hidden_size, output_size).to(self.device)
+        self.model = FeedForward(input_size, self.hidden_size, output_size, dropout=self.dropout).to(self.device)
         criterion = nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr)
 
@@ -67,7 +67,6 @@ class FeedForwardTrainer:
             print(f"Epoch {epoch+1}/{self.epochs}  Loss: {total_loss/len(loader):.4f}")
 
     def predict(self, features):
-
         if hasattr(features, "toarray"):
             features = features.toarray()
 
@@ -77,8 +76,6 @@ class FeedForwardTrainer:
             outputs = self.model(X)
             predictions = torch.argmax(outputs, dim=1)
         return predictions.cpu().numpy()
-
-
 
     def grid_search(self, X_train, y_train, X_test, y_test):
         results = []

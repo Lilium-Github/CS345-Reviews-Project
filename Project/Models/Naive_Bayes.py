@@ -1,40 +1,44 @@
-import json
+from sklearn.naive_bayes import ComplementNB
+from sklearn.dummy import DummyClassifier
+from sklearn.metrics import accuracy_score
+from scipy.sparse import issparse
 import numpy as np
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.pipeline import make_pipeline
 
-text_arr = []
-rating_arr = []
-counter = 100000
+class NaiveBayesTrainer:
+    def __init__(self):
+        self.model = None
+        self.baseline = None
 
-file = "Software.jsonl"
-with open(file, 'r') as fp:
-    for line in fp:
-        line_dict = json.loads(line.strip())
-        text_arr.append(line_dict['title'] + " " + line_dict['text'])
-        rating_arr.append(line_dict['rating'])
+    def _remove_vader(self, X):
+        if issparse(X):
+            X = X.toarray()
+        return X[:, 4:]  # skip first 4 VADER columns
 
-        counter -= 1
-        if counter == 0: break # this line is just here to make sure nothing breaks from a dataset too big
-        
-X = np.array(text_arr)
-y = np.array(rating_arr)
+    def train(self, X_train, y_train):
+        self.y_train = y_train
+        self.X_train = self._remove_vader(X_train)
 
-model = make_pipeline(TfidfVectorizer(), MultinomialNB(alpha=0, force_alpha=True))
+        self.model = ComplementNB(alpha=1.0)
+        self.model.fit(self.X_train, y_train)
 
-model.fit(X,y)
+        self.baseline = DummyClassifier(strategy='most_frequent')
+        self.baseline.fit(self.X_train, y_train)
 
-example_text = "hated this. 0 stars if i could"
+    def predict(self, X):
+        return self.model.predict(self._remove_vader(X))
 
-prediction = model.predict([example_text])[0]
+    def results(self, X_test, y_test):
+        X_test_clean   = self._remove_vader(X_test)
+        test_preds     = self.model.predict(X_test_clean)
+        train_preds    = self.model.predict(self.X_train)
+        baseline_preds = self.baseline.predict(X_test_clean)
 
-print("I think the following review:\n", example_text, "\nGave the item a rating of:", prediction)
+        train_acc    = accuracy_score(self.y_train, train_preds) * 100
+        test_acc     = accuracy_score(y_test, test_preds) * 100
+        baseline_acc = accuracy_score(y_test, baseline_preds) * 100
 
-print()
-
-example_text = "New maid spends more time yowling at me and scrolling tumblr than cleaning."
-
-prediction = model.predict([example_text])[0]
-
-print("I think the following review:\n", example_text, "\nGave the item a rating of:", prediction)
+        print(f"Train:    {train_acc:.2f}%")
+        print(f"Test:     {test_acc:.2f}%")
+        print(f"Baseline: {baseline_acc:.2f}%")
+        print(f"Improvement over baseline: {test_acc - baseline_acc:.2f}%")
+        return train_acc, test_acc, baseline_acc

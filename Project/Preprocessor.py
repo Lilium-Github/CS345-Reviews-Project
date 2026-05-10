@@ -12,7 +12,7 @@ import re
 import os
 
 PREPROCESSED_CACHE = "preprocessed_cache.pkl"
-TFIDF_FEATURES = 3000 # Number of important words found in data to use as features for ML models
+TFIDF_FEATURES = 5000 # Number of important words found in data to use as features for ML models
 
 
 stop_words = set(stopwords.words('english'))

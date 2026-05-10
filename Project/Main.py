@@ -23,57 +23,59 @@ print(type(y))
 print(X[:20].toarray())
 print("Matrix size: ", X.shape)
 
-
-# Feed forward (with gpu) 
-
-# Attempt #1 100,000 reviews Train: 71.169% Test: 70.54% hidden_size=256, batch_size=256, epochs=15 and dropout=0.5, TFIDF_FEATURES=1000 Data: VideoGames 
-
-# Attempt #2 100,000 reviews Train: 64.09% Test: 63.07% hidden_size=256, batch_size=256, epochs=15 and dropout=0.5, TFIDF_FEATURES=1000 Data: Software 
-
-# Attempt #3 100,000 reviews Train: 75.11% Test: 74.11% hidden_size=256, batch_size=256, epochs=15 and dropout=0.2, TFIDF_FEATURES=1000 Data: Office_Products 
-
-# Feedforward:
-#from Models.Torch_Feedforward import FeedForwardTrainer
-#y_remapped = y - 1
-#X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.1, random_state=42)
-#trainer = FeedForwardTrainer()
-#results = trainer.grid_search(X_train, y_train, X_test, y_test)
+#Feedforward:
+from Models.Torch_Feedforward import FeedForwardTrainer
+y_remapped = y - 1
+X_train, X_test, y_train, y_test = train_test_split(X, y_remapped, test_size=0.1, random_state=42)
+trainer = FeedForwardTrainer()
+results = trainer.grid_search(X_train, y_train, X_test, y_test)
 
 # SVM:
-from Models.SVM import Svm_Trainer
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-Svm_Trainer(X_train, X_test, y_train, y_test)
+#from Models.SVM import Svm_Trainer
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+#Svm_Trainer(X_train, X_test, y_train, y_test)
 
 
-#Best params: {'C': 1} 100,000 linear 50k features software ~22 hours to train
-#CV accuracy: 0.71%
-#Train: 82.89%
-#Test: 71.54%
+
+# LogisticRegression:
+# from Models.LogisticRegression import LogisticRegressionTrainer
+# regtrainer = LogisticRegressionTrainer(max_features=3000)
+#X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# regtrainer.grid_search(X_train, y_train, X_test, y_test)
 
 
-#Video games with 10,000 reviews and 3000 TF-IDF features:
-#Best params: {'C': 1}
-#CV accuracy: 0.695375
-#Train: 80.85%
-#Test: 69.30%
+# Naive Bayes:
+# from Models.Naive_Bayes import NaiveBayesTrainer
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# trainer = NaiveBayesTrainer()
+# trainer.train(X_train, y_train)
+# trainer.results(X_test, y_test)
 
-# Books with 10,000 reviews and 3000 TF-IDF features and linear kernel:
-#Best params: {'C': 1}
-#CV accuracy: 0.633
-#Train: 78.45%
-#Test: 62.05%
-
-# CD & Vinyl with 10,000 reviews and 3000 TF-IDF features and linear kernel:
-# Best params: {'C': 1}
-# CV accuracy: 0.7855000000000001
-# Train: 83.94%
-# Test: 78.90%
-
-# Clothing and Jewelry with 10,000 reviews and 3000 TF-IDF features and linear kernel:
-#Best params: {'C': 1}
-#CV accuracy: 0.6954999999999999
-#Train: 82.09%
-#Test: 69.95%
+#trainer.predict_example("hated this. 0 stars if i could")
+#trainer.predict_example("New maid spends more time yowling at me and scrolling tumblr than cleaning.")
 
 
+# (10000, 5004) on books
+
+# Bayes
+# Matrix size:  
+# Train: 72.21%
+# Test: 59.90%
+
+# Logistic Regression
+# CV accuracy: 0.6312499999999999
+# Train: 77.50%
+# Test: 62.50%
+
+# SVM
+# Train: 81.91%
+# Test: 63.00%
+
+# Feedforward
+# Train: 99.32%
+# Test: 59.80%
+
+
+
+  
 
